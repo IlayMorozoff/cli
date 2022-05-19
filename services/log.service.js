@@ -2,11 +2,11 @@ import chalk from 'chalk';
 import dedent from 'dedent-js'
 
 export const printError = (error) => {
-  console.log(chalk.bgRed(' Error ') + error);
+  console.log(chalk.bgRed(' Error  ') + error);
 };
 
 export const printSuccess = (msg) => {
-  console.log(chalk.bgGreen(' Success ') + msg);
+  console.log(`${(chalk.bgGreen(' Success '))} ${msg}`);
 };
 
 export const printHelp = () => {
@@ -18,11 +18,15 @@ export const printHelp = () => {
     -t [API-KEY] для сохранения токена
     `
   )
-}
+};
 
-// `${chalk.bgCyan('Help'} \n
-// Без параметров - вывод погоды \n
-// -s [CITY] для установки города \n
-// -h для вывода помощи \n
-// -t [API-KEY] для сохранения токена \n
-// `))
+export const printWeather = (res, icon) => {
+  console.log(
+    dedent`${chalk.bgYellowBright(' WEATHER ')} Погода в городе ${res.name}
+    ${icon}  ${res.weather[0].description}
+    Температура: ${res.main.temp} °С (ощущается как ${res.main.feels_like} °С)
+    Влажность: ${res.main.humidity}%
+    Скорость ветра: ${res.wind.speed} м/с
+    `
+  )
+}
